@@ -1,5 +1,5 @@
 {
-	"name": "pipeline1",
+	"name": "Customer_data_pipeline",
 	"properties": {
 		"activities": [
 			{
