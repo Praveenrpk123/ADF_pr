@@ -1,0 +1,84 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "AirBnb-Azure-ADF-Proj1"
+		},
+		"AirBnB_CosmosDb_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AirBnB_CosmosDb'"
+		},
+		"AirBnB_synapse_analytics_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'AirBnB_synapse_analytics'"
+		},
+		"AirBnB_adls_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://airbnbcdcstracc.dfs.core.windows.net/"
+		},
+		"AirBnB_synapse_analytics_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "azure-synapse-proj1.sql.azuresynapse.net"
+		},
+		"AirBnB_synapse_analytics_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "Sql_Pool_AirBnB_proj1"
+		},
+		"AirBnB_synapse_analytics_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "sqladminuser"
+		},
+		"containerUri": {
+			"type": "string",
+			"metadata": "URI to storage account containing linked ARM templates"
+		},
+		"containerSasToken": {
+			"type": "string",
+			"metadata": "Sas token to storage account containing linked ARM templates"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "AirBnb-Azure-ADF-Proj1_ArmTemplate_0",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_0.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"AirBnB_CosmosDb_connectionString": {
+						"value": "[parameters('AirBnB_CosmosDb_connectionString')]"
+					},
+					"AirBnB_synapse_analytics_password": {
+						"value": "[parameters('AirBnB_synapse_analytics_password')]"
+					},
+					"AirBnB_adls_properties_typeProperties_url": {
+						"value": "[parameters('AirBnB_adls_properties_typeProperties_url')]"
+					},
+					"AirBnB_synapse_analytics_properties_typeProperties_server": {
+						"value": "[parameters('AirBnB_synapse_analytics_properties_typeProperties_server')]"
+					},
+					"AirBnB_synapse_analytics_properties_typeProperties_database": {
+						"value": "[parameters('AirBnB_synapse_analytics_properties_typeProperties_database')]"
+					},
+					"AirBnB_synapse_analytics_properties_typeProperties_userName": {
+						"value": "[parameters('AirBnB_synapse_analytics_properties_typeProperties_userName')]"
+					}
+				}
+			},
+			"dependsOn": []
+		}
+	]
+}
