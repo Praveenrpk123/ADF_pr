@@ -1,5 +1,5 @@
 {
-	"name": "AirBnB_cosmosDb",
+	"name": "AirBnB_cosmos",
 	"type": "Microsoft.DataFactory/factories/linkedservices",
 	"properties": {
 		"annotations": [],
